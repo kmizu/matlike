@@ -1,0 +1,10 @@
+val mA = [
+  1, -2 3
+  1 0 1
+]
+val mB = [
+  2
+  3
+  1
+]
+println(mA _*_ mB)
