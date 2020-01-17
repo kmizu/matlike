@@ -1,11 +1,12 @@
 package com.github.kmizu.matlike
 
-import org.scalatest.{DiagrammedAssertions, FunSpec}
 import java.util.ArrayList
 import java.util.List
 import java.util.HashMap
+import org.scalatest.diagrams.Diagrams
+import org.scalatest.funspec.AnyFunSpec
 
-trait SpecHelper extends FunSpec with DiagrammedAssertions {
+trait SpecHelper extends AnyFunSpec with Diagrams {
   val E = new Evaluator
 
   def matrixOf(rows: List[Any]*): MatrixValue = {
