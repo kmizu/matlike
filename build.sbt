@@ -27,7 +27,7 @@ libraryDependencies ++= Seq(
   "com.github.kmizu" %% "scomb" % "0.9.0",
   "com.github.scaruby" %% "scaruby" % "0.6",
   "org.ow2.asm" % "asm" % "7.3.1",
-  "junit" % "junit" % "4.7" % "test",
+  "junit" % "junit" % "4.13.2" % "test",
   "org.scalatest" %% "scalatest" %  "3.0.8"
 )
 
