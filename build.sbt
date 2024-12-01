@@ -28,7 +28,7 @@ libraryDependencies ++= Seq(
   "com.github.scaruby" %% "scaruby" % "0.6",
   "org.ow2.asm" % "asm" % "9.7",
   "junit" % "junit" % "4.7" % "test",
-  "org.scalatest" %% "scalatest" %  "3.0.8"
+  "org.scalatest" %% "scalatest" %  "3.0.9"
 )
 
 initialCommands in console +=  Iterator(
