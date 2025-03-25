@@ -1,7 +1,7 @@
 organization := "com.github.kmizu"
 name := "matlike"
 version := "0.0.1-alpha"
-scalaVersion := "2.13.15"
+scalaVersion := "3.3.5"
 publishMavenStyle := true
 
 val scaladocBranch = settingKey[String]("branch name for scaladoc -doc-source-url")
@@ -24,11 +24,11 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "com.github.kmizu" %% "scomb" % "0.9.0",
-  "com.github.scaruby" %% "scaruby" % "0.6",
+  "com.github.kmizu" % "scomb_2.13" % "0.9.0",
+  "com.github.scaruby" % "scaruby_2.13" % "0.6",
   "org.ow2.asm" % "asm" % "9.7",
   "junit" % "junit" % "4.7" % "test",
-  "org.scalatest" %% "scalatest" %  "3.0.8"
+  "org.scalatest" %% "scalatest" %  "3.2.19"
 )
 
 initialCommands in console +=  Iterator(

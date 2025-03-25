@@ -91,9 +91,10 @@ class Interpreter extends Processor[TypedAst.Program, Value] {interpreter =>
     }
 
     define("thread") { case List(fun: FunctionValue) =>
-      new Thread({() =>
+      new Thread(() => {
           val env = new RuntimeEnvironment(fun.environment)
           interpreter.evaluate(TypedAst.FunctionCall(TDynamic, NoLocation, fun.value, Nil), env)
+          ()
       }).start()
       UnitValue
     }
