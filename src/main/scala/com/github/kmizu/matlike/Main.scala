@@ -5,24 +5,67 @@ import java.io.File
 import com.github.scaruby.SFile
 
 import scala.collection.Iterator.continually
+import scala.util.boundary
 
 /**
  * @author Kota Mizushima
  */
 object Main {
   class REPL(val evaluator: Evaluator) {
+    private def isInputComplete(input: String): Boolean = {
+      boundary:
+        val stack = new scala.collection.mutable.Stack[Char]()
+        var inString = false
+        
+        input.foreach { c =>
+          if (inString) {
+            if (c == '"') inString = false
+          } else {
+            c match {
+              case '"' => inString = true
+              case '(' | '[' | '{' => stack.push(c)
+              case ')' => if (stack.isEmpty || stack.pop() != '(') boundary.break(true) else ()
+              case ']' => if (stack.isEmpty || stack.pop() != '[') boundary.break(true) else ()
+              case '}' => if (stack.isEmpty || stack.pop() != '{') boundary.break(true) else ()
+              case _ => ()
+            }
+          }
+        }
+        
+        stack.isEmpty && !inString && !input.matches(""".*[\+\-*/=]>?$""")
+    }
+
     def start(): Unit = {
       var nextLineIsRequested = true
+      var currentBuffer = new StringBuilder
+      
       while(nextLineIsRequested) {
-        Console.print("> ")
+        val prompt = if (currentBuffer.isEmpty) "> " else "... "
+        Console.print(prompt)
         Console.flush()
+        
         val line = Console.in.readLine()
         Console.flush()
-        if(line.stripLineEnd == ":exit") {
+        
+        if (line == null) { // Handle Ctrl+D
           nextLineIsRequested = false
+        } else if (line.stripLineEnd == ":exit") {
+          nextLineIsRequested = false
+        } else if (line.stripLineEnd == ":reset") {
+          currentBuffer.clear()
+          println("Input reset")
         } else {
-          val value: Value = evaluator.evaluateString(line)
-          println(s"value = ${value}")
+          currentBuffer.append(line).append("\n")
+          if (isInputComplete(currentBuffer.toString)) {
+            try {
+              val value = evaluator.evaluateString(currentBuffer.toString)
+              println(s"value = ${value}")
+            } catch {
+              case e: Exception =>
+                println(s"Error: ${e.getMessage}")
+            }
+            currentBuffer.clear()
+          }
         }
       }
     }
@@ -58,4 +101,3 @@ object Main {
     }
   }
 }
-

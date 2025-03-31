@@ -1,5 +1,7 @@
 # Matlike: A language for calculating matrices
 
+![Build Status](https://github.com/kmizu/matlike/actions/workflows/ci.yml/badge.svg)
+
 ## Introduction
 
 Matlike is an experimental language for calculating matrices.  Matlike have characteristics as follows:
