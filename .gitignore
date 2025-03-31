@@ -16,3 +16,5 @@ dist
 *.swp
 .cache-main
 .bsp/
+.metals/
+.vscode/
