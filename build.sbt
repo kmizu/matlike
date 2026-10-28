@@ -1,7 +1,7 @@
 organization := "com.github.kmizu"
 name := "matlike"
 version := "0.0.1-alpha"
-scalaVersion := "3.3.5"
+scalaVersion := "3.3.9"
 publishMavenStyle := true
 
 val scaladocBranch = settingKey[String]("branch name for scaladoc -doc-source-url")
